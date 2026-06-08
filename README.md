@@ -1,18 +1,17 @@
 # su26-ai301-contribution
 
-# Contribution [#]: [Issue Title]
+# Contribution [1]: [schema_validation.sh should automatically revert the patch it applies]
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** [1]  
+**Student:** [Praise Olatide]  
+**Issue:** [https://github.com/wesnoth/wesnoth/issues/9967#issuecomment-4650546668]  
+**Status:** [Phase I [In Progress]
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
-
+Issue seems fairly straight forward with necessary context. Had alot of the green flags like few comments, was an open issue that was still relevant, and fit with the scope of what I already knew. 
 ---
 
 ## Understanding the Issue
