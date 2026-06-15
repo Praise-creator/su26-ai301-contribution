@@ -17,34 +17,29 @@ Issue seems fairly straight forward with necessary context. Had alot of the gree
 ## Understanding the Issue
 
 ### Problem Description
-
-[In your own words, what's broken or missing?]
+The current validation script (schema_validation.sh) applies a temporary patch but does not revert it. This leaves edited schema files in the working tree aand can be annoying if you commit the edited schema files. 
 
 ### Expected Behavior
 
-[What should happen?]
+Running the script should leave the repo in the same state it started in. 
 
 ### Current Behavior
 
-[What actually happens?]
+The script calls schema_validation.paatch and then runs validation. it never undoes the patch. 
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
-
+schema_validation.sh, schema_validation.patch ,  schema files under dataa/schema/... 
 ---
 
 ## Reproduction Process
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
-
+ install dependencies with homebrew boost, sdl3, sdl3_image, sdl3_mixer, fontconfig, cairo, pango, libvorbis, openssl@3, etc.). See SConstruct and INSTALL.md for details.
+ 
 ### Steps to Reproduce
-
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+starting from a clean checkout with no staged changes. Build the project after installing the necessary dependencies to ensure the ./wesnoth exists. after run the schema_validation.sh file. after it finishes run git status. observe the changed files.
 
 ### Reproduction Evidence
 
@@ -58,30 +53,30 @@ Issue seems fairly straight forward with necessary context. Had alot of the gree
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
-
+The script runs many validation commands that can fail, but there is no guaranteed cleanup on exit/failure
 ### Proposed Solution
 
-[High-level description of your fix approach]
-
+Run the validation in a temporary work tree so the maain worktree is never modified. 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** script applies a patch but does not revert it
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** 
 
 **Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+1. modiy schema_validation.sh to check for a clean working tree. 
+2.implement the worktree flow: create a temp dir, run validations
+3. add a fallback trap to revert in-place if worktree is unavailable
+4. add logging and exit codes so CI still fails when validation fails
+5. add tests 
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** https://github.com/Praise-creator/wesnoth-ai301/tree/fix-issue-schema_validation-auto-revert 
 
 **Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** run git status before and after running scropt, must be identical. 
 
 ---
 
