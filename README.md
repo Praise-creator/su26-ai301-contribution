@@ -46,6 +46,7 @@ starting from a clean checkout with no staged changes. Build the project after i
 - **Commit showing reproduction:** [Link to commit in your fork]
 - **Screenshots/logs:** [If applicable]
 - **My findings:** [What you discovered during reproduction]
+<img width="1178" height="510" alt="image" src="https://github.com/user-attachments/assets/819512de-e53c-483f-a71c-8db30f9c827b" />
 
 ---
 
