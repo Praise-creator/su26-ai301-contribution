@@ -85,20 +85,15 @@ Using UMPIRE framework (adapted):
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+- [ ] Test case 1: [Run `utils/CI/schema_validation_regression.sh` with a dummy `wesnoth` exe and verify it exits 
+- [ ] Test case 2: confirm `git status --porcelain` in the main repository is unchanged before and after the regression script
+- [ ] Test case 3: confirm the temp worktree created by the regression test is cleaned up on exit even if validation fails
+
 
 ### Integration Tests
 
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
+- [ ] Integration scenario 1:run `utils/CI/schema_validation.sh` from inside a temporary  `git worktree` and verify the temporary schema patch stays in thaat worktree
 
-### Manual Testing
-
-[What you tested manually and results]
-
----
 
 ## Implementation Notes
 
@@ -112,23 +107,26 @@ Using UMPIRE framework (adapted):
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:** [`utils/CI/schema_validation.sh`](utils/CI/schema_validation.sh), [`utils/CI/schema_validation_regression.sh`](utils/CI/schema_validation_regression.sh), [`.github/workflows/ci-main.yml`](.github/workflows/ci-main.yml)
+- **Key commits:** 
+- **Approach decisions:** used a temporary detached `git worktree` instead of in-place patch so the validation patch cannot leak into the main checkout
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+[**PR Link:** [GitHub PR URL when submitted]
+](https://github.com/wesnoth/wesnoth/pull/11337)
+pr for issue #9967
+Changes made:
+This changes schema_validation.sh so schema validation runs inside a temporary detached git worktree instead of the developer’s main working tree. Regression test was also added in schema_validation_regression.sh
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
 
 **Maintainer Feedback:**
 - [Date]: [Summary of feedback received]
 - [Date]: [How you addressed it]
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** [Awaiting review / Iterating / Approved / Merged] awaiting review 
 
 ---
 
